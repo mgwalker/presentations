@@ -11,37 +11,163 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          how to test
+          testing
           <h1>the weather</h1>
           <p class="fragment">(Wait, is that hard?)</p>
         </section>
         <section>
-          <img src="images/01.png">
+          <div style="display: flex; justify-content: center;">
+            <img src="images/01.png" style="max-width: 45%;">
+            &nbsp;
+            <img src="images/02.png" style="max-width: 45%;">
+          </div>
+          <h2 class="fragment">Hey, where's that frost advisory?</h2>
+        </section>
+        <section data-background-image="https://media.giphy.com/media/xT9IgNPVbGsa0Wd8li/giphy.gif?cid=790b7611wxd3b3cgl23orriojo2fn55v9wt1526aimx7aqvn&ep=v1_gifs_search&rid=giphy.gif&ct=g">
+          <div class="fragment" style="padding: 2rem; border-radius: 1em; background: black;">(that's a bug)</div>
         </section>
         <section>
-          <img src="images/02.png">
+          Naturally, we'll fix it. Put it on the backlog! We'll get to it in a couple of days!
+        </section>
+        <section>
+          <div style="display: flex; justify-content: center;">
+            <img src="images/03.png" style="max-width: 45%;">
+          </div>
+          Oops. The frost advisory expired.
+        </section>
+        <section>
+          <h1>MAJOR DISCOVERY!</h1>
+          The weather changes!
+        </section>
+        <section style="text-align: left;">
+          <p>
+            We get our data from <a href="https://api.weather.gov">api.weather.gov</a>.
+            It serves up data in JSON. Maybe when we discover a bug, we can save
+            the JSON so we'll have something to refer back to when it's time to
+            work on the bug?
+          </p>
+          <p>
+            But the JSON is big, so finding the thing we weren't expecting is
+            hard. It'd be much nicer if we could get our app to use this
+            bug-inducing JSON at runtime so we can attach a debugger!
+          </p>
+        </section>
+        <section>
+          <h2>So we built a new thing</h2>
+          I made an Express app in Node.js. It looks at incoming requests,
+          converts the request path into a file path, and if it has a matching
+          file, it serves that. If it doesn't have that file, it sends the
+          request on to the real API.
+          <p class="fragment">
+            And it can record those real requests to disk.
+          </p>
+        </section>
+        <section>
+          <div style="display: flex; justify-content: left; align-items: top;">
+            <div style="width:70vw;">
+              <img src="images/04.png" style="max-width: 100%">
+            </div>
+            <div style="margin-left: 1rem; text-align: left;">
+              <p>
+                These are some of our API files. These directories and filenames
+                correspond with API request paths.
+              </p>
+              <p style="font-size: 0.6em;">
+                https://api.weather.gov/gridpoints/BMX/32,69/forecast/hourly
+                <br><br>
+                /gridpoints/BMX/32,69/forecast/hourly.json
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          Which is super cool, but by the time we came back to debug that frost
+          advisory, it had expired.
+          <p class="fragment" style="margin-top: 1em;">But we have a solution!</p>
         </section>
         <section data-transition="slide none">
+          <h3>Here's the data</h3>
           <pre>
-            <code class="language-javascript" data-trim data-line-numbers="|3">
+            <code class="language-javascript" data-trim data-line-numbers="|5-7">
               {
-                temperature: 37,
-                windSpeed: 4,
-                conditions: "cloudy as fuck"
+                ...
+                sent: "2024-01-08T13:48:00-06:00",
+                effective: "2024-01-08T13:48:00-06:00",
+                onset: "2024-01-08T12:48:00-06:00",
+                expires: "2024-01-08T17:48:00-06:00",
+                ends: "2024-01-08T15:48:00-06:00",
+                status: "Actual",
+                messageType: "Update",
+                category: "Met",
+                severity: "Moderate",
+                certainty: "Likely",
+                urgency: "Expected",
+                event: "Frost Advisory",
+                ...
               }
             </code>
           </pre>
         </section>
         <section data-transition="none slide">
-            <pre>
-            <code class="language-javascript" data-trim data-line-numbers="3">
+          <h3>But with magic</h3>
+          <pre>
+            <code class="language-javascript" data-trim data-line-numbers="5-7">
               {
-                temperature: 37,
-                windSpeed: 17,
-                conditions: "cloudy as fuck"
+                ...
+                sent: "2024-01-08T13:48:00-06:00",
+                effective: "2024-01-08T13:48:00-06:00",
+                onset: "date:now -1 hour",
+                expires: "date:now +4 hours",
+                ends: "date:now +2 hours",
+                status: "Actual",
+                messageType: "Update",
+                category: "Met",
+                severity: "Moderate",
+                certainty: "Likely",
+                urgency: "Expected",
+                event: "Frost Advisory",
+                ...
               }
             </code>
           </pre>
+        </section>
+        <section data-transition="none slide">
+          <h3>But with magic</h3>
+          <pre>
+            <code class="language-javascript" data-trim data-line-numbers="5-7">
+              {
+                ...
+                sent: "2024-01-08T13:48:00-06:00",
+                effective: "2024-01-08T13:48:00-06:00",
+                onset: "date:today 06:00:-6",
+                expires: "date:today 11:00:-6",
+                ends: "date:today 11:00-6 +2 days",
+                status: "Actual",
+                messageType: "Update",
+                category: "Met",
+                severity: "Moderate",
+                certainty: "Likely",
+                urgency: "Expected",
+                event: "Frost Advisory",
+                ...
+              }
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>We use it a lot</h2>
+          <ul>
+            <li class="fragment">day to day development</li>
+            <li class="fragment">capturing errors for future debugging</li>
+            <li class="fragment">user research sessions</li>
+            <li class="fragment">end-to-end testing</li>
+          </ul>
+        </section>
+        <section>
+          <img src="images/05.png">
+        </section>
+        <section>
+          <img src="images/06.png">
         </section>
       </div>
     </div>
