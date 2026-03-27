@@ -37,35 +37,66 @@ const getScssEntrypoints = async () => {
   ];
 };
 
-const main = async () => {
-  await fs.cp("src", "site", { recursive: true });
-  await fs.rm("site/assets", { force: true, recursive: true });
+export const copyStaticFile = async (input) => {
+  const out = input.replace(/^src\//, "site/");
+  await fs.mkdir(path.dirname(out), { recursive: true });
+  await fs.cp(input, out);
+};
 
+const copyStatic = async () => {
+  const files = [];
+  const dirs = ["src"];
+
+  while (dirs.length) {
+    const dir = dirs.pop();
+    const contents = await fs.readdir(dir, { withFileTypes: true });
+
+    for (const file of contents) {
+      const p = path.join(dir, file.name);
+      if (file.isDirectory()) {
+        dirs.push(p);
+      } else if (!/\.(js|scss|DS_Store)$/.test(p)) {
+        files.push(p);
+      }
+    }
+  }
+
+  for await (const file of files) {
+    await copyStaticFile(file);
+  }
+};
+
+export const buildScss = async () => {
+  const scssEntrypoints = await getScssEntrypoints();
+
+  for await (const { input, output } of scssEntrypoints) {
+    const { css } = await sass.compileAsync(input, {
+      loadPaths: [
+        "node_modules/reveal.js/css",
+        "node_modules/highlight.js/scss",
+      ],
+    });
+    await fs.mkdir(path.dirname(output), { recursive: true });
+    await fs.writeFile(output, css);
+  }
+};
+
+export const buildJs = async () => {
   await esbuild.build({
     bundle: true,
     entryPoints: ["src/assets/main.js"],
     outdir: "site/assets",
   });
+};
 
-  const scssEntrypoints = await getScssEntrypoints();
+export const build = async () => {
+  await fs.rm("site/assets", { force: true, recursive: true });
 
-  for await (const { input, output } of scssEntrypoints) {
-    try {
-      const { css } = await sass.compileAsync(input, {
-        loadPaths: [
-          "node_modules/reveal.js/css",
-          "node_modules/highlight.js/scss",
-        ],
-      });
-      await fs.mkdir(path.dirname(output), { recursive: true });
-      await fs.writeFile(output, css);
-      console.log(output);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  await copyStatic();
+  await buildJs();
+  await buildScss();
 };
 
 if (import.meta.main) {
-  main();
+  build();
 }
