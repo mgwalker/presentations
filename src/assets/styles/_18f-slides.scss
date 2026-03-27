@@ -1,0 +1,114 @@
+.slides.slides-18f {
+  $darkest: #1c304a;
+  $brightBlue: #00cfff;
+  $mediumBlue: #046b99;
+
+  * {
+    font-family: "Public Sans";
+    line-height: 1.2;
+  }
+
+  section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: calc(100vh - 10vmin);
+    width: calc(100vw - 10vmin);
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5vmin;
+    font-size: 4vmin;
+
+    strong {
+      font-weight: 700;
+    }
+
+    h1 {
+      margin-top: 5rem;
+      margin-left: 5rem;
+      font-size: 7vmin;
+      font-weight: 700;
+      color: $darkest;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    color: $mediumBlue;
+
+    &.slides-18f--title {
+      background: $darkest;
+      color: white;
+
+      h1 {
+        font-size: 10vmin;
+        font-weight: 900;
+      }
+
+      .highlight {
+        color: $brightBlue;
+      }
+    }
+
+    &.slides-18f--subtitle {
+      background: $brightBlue;
+      color: $darkest;
+
+      h1 {
+        font-size: 10vmin;
+        font-weight: 700;
+      }
+
+      .highlight {
+        color: white;
+      }
+    }
+
+    &.slides-18f--summary {
+      background: white;
+      align-items: start;
+      justify-content: start;
+      text-align: left;
+
+      p {
+        margin-left: 5rem;
+        color: $mediumBlue;
+      }
+    }
+
+    &.slides-18f--4dots {
+      align-items: start;
+      justify-content: start;
+      text-align: left;
+      color: black;
+
+      h1 {
+        margin-bottom: 10vh;
+      }
+
+      ul {
+        margin-left: 20vmin;
+        max-width: 80vw;
+        column-count: 2;
+        column-gap: 20vh;
+        list-style-type: none;
+
+        li {
+          break-inside: avoid-column;
+          text-align: left;
+          margin-bottom: 10vh;
+
+          &:before {
+            position: absolute;
+            margin-top: -4vmin;
+            margin-left: -16vmin;
+            font-size: 20vmin;
+            color: $brightBlue;
+            content: "⏺";
+          }
+        }
+      }
+    }
+  }
+}
