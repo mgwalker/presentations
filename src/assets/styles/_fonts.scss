@@ -1,0 +1,27 @@
+@use "sass:list";
+
+$weights:
+  "Thin", "ExtraLight", "Light", "Normal", "Medium", "SemiBold", "Bold",
+  "Extra Bold", "Black";
+
+@for $i from 1 through list.length($weights) {
+  $weight: $i * 100;
+  $name: list.nth($weights, $i);
+
+  @font-face {
+    font-family: "Public Sans";
+    src:
+      "fonts/PublicSans-" + $name + ".woff" format("woff"),
+      "fonts/PublicSans-" + $name + ".woff2" format("woff2");
+    font-weight: $weight;
+  }
+
+  @font-face {
+    font-family: "Public Sans";
+    src:
+      "fonts/PublicSans-" + $name + "Italic.woff" format("woff"),
+      "fonts/PublicSans-" + $name + "Italic.woff2" format("woff2");
+    font-weight: $weight;
+    font-style: italic;
+  }
+}

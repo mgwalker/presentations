@@ -84,7 +84,7 @@ export const buildScss = async () => {
 export const buildJs = async () => {
   await esbuild.build({
     bundle: true,
-    entryPoints: ["src/assets/main.js"],
+    entryPoints: ["src/assets/main.js", "src/assets/nws-data-workshop.js"],
     outdir: "site/assets",
   });
 };
