@@ -192,7 +192,7 @@ Notes:
 ---
 <!-- .slide: class="content" -->
 
-## Data is like water, APIs are like pipes
+## Data is water, APIs are pipes
 
 If you want to know the current yield on 30 year
 treasuries, you can just ask for that. If you want
@@ -201,7 +201,8 @@ to know the temperature in Goofy Ridge, IL,
 find it without having to know how it was measured.
 If you want to know where the International Space
 Station is, you can look it up and you don't need to
-know anything about astronomy.<!-- .element data-temperature -->
+know anything about astronomy.
+<!-- .element: class="line-height-15" -->
 
 ---
 <!-- .slide: class="section" -->
@@ -296,15 +297,11 @@ What if they shared data? The 529/UP program is bridging
 two systems to make it easier for people to claim their
 unclaimed property and put it to work.
 
-What if the budget could automatically pull employee data
-directly from ADP?
-
 What if the various systems that track investments,
 spending, budget, etc., could share their data? What
 if a single audit system could pull that data at any
-time and highlight discrepancies? What if the system
-could pull the data automatically at regular intervals
-and notify someone if anything is wonky?
+time and highlight discrepancies? What if that happened
+automatically at regular intervals?
 
 ---
 <!-- .slide: class="title" -->
