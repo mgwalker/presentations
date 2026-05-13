@@ -16,6 +16,9 @@ formatting or filtering the data.
 
 ---
 <!-- .slide: class="content four-dots" -->
+
+# What is it?
+
 APIs allow us to build systems that do one or two things
 really well and then connect various systems together to
 do more complex tasks. This has some benefits:

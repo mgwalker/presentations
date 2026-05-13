@@ -1,0 +1,17 @@
+:root {
+  --real-slide-width: min(100vw, calc(100vh * 16 / 9));
+  --real-slide-height: calc(var(--real-slide-width) * 9 / 16);
+  --font-size: min(
+    calc(var(--real-slide-width) / 33.333),
+    calc(var(--real-slide-height) / 25)
+  );
+  --slide-bar-height: max(0, calc(var(--real-slide-height) / 2));
+}
+
+html {
+  font-size: var(--font-size);
+
+  body.reveal-viewport {
+    background: black;
+  }
+}
