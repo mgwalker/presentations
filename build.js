@@ -84,7 +84,11 @@ export const buildScss = async () => {
 export const buildJs = async () => {
   await esbuild.build({
     bundle: true,
-    entryPoints: ["src/assets/main.js", "src/assets/proxy.js"],
+    entryPoints: [
+      "src/assets/main.js",
+      "src/assets/proxy.js",
+      "src/assets/apis.js",
+    ],
     outdir: "site/assets",
   });
 };

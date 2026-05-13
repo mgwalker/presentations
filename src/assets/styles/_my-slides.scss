@@ -1,3 +1,5 @@
+@use "night-owl.scss";
+
 .slides.slides-mine {
   $darkest: #1c304a;
   $brightBlue: #00cfff;
@@ -6,6 +8,11 @@
   * {
     font-family: "Public Sans";
     line-height: 1.2;
+  }
+
+  pre.code-wrapper {
+    background: $darkest;
+    color: white;
   }
 
   section {
@@ -32,6 +39,10 @@
       text-align: left;
     }
 
+    pre {
+      overflow-y: scroll;
+    }
+
     h1 {
       font-size: 10vmin;
       font-weight: 900;
@@ -55,6 +66,18 @@
       background: $brightBlue;
       color: $darkest;
 
+      a,
+      a:visited {
+        color: $brightBlue;
+        background: $darkest;
+        text-decoration: none;
+        border-bottom: 3px dotted white;
+
+        &:hover {
+          color: white;
+        }
+      }
+
       h1 {
         font-size: 8vmin;
         font-weight: 700;
@@ -71,13 +94,14 @@
     &.content {
       justify-content: start;
       align-items: start;
+      color: black;
 
-      h1 {
+      h1,
+      h2 {
         align-self: start;
         font-size: 6vmin;
         font-weight: 700;
-        color: black;
-        border-bottom: 1px solid black;
+        color: $mediumBlue;
         margin-bottom: 3rem;
       }
 
@@ -91,6 +115,7 @@
 
         &.big {
           max-width: 80vw;
+          max-height: 70vh;
         }
       }
     }
@@ -164,6 +189,7 @@
             font-weight: 700;
             color: $mediumBlue;
             font-size: 2rem;
+            margin-bottom: 0;
           }
 
           &:before {
