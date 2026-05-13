@@ -25,7 +25,7 @@ do more complex tasks. This has some benefits:
   task, it's easier to maintain over time.
 
 * ## Abstraction
-  When you're using someone else data, you don't have to
+  When you're using someone else's data, you don't have to
   know about how it was collected or processed.
 
 * ## Testable
@@ -35,6 +35,30 @@ do more complex tasks. This has some benefits:
 * ## Independence
   Letting external systems handle specific needs makes it
   easier to swap them out over time.
+
+Notes:
+* ## Maintainability
+  Because each piece does a relatively simple and isolated
+  task, it's easier to maintain over time.
+
+* ## Abstraction
+  When you're using someone else's data, you don't have to
+  know about how it was collected or processed.
+
+* ## Testable
+  Smaller pieces doing simpler logic are easier to understand
+  and test, leading to higher confidence that they work.
+
+* ## Independence
+  Letting external systems handle specific needs makes it
+  easier to swap them out over time.
+
+APIs are also an important thing to look for in software
+procurements. When you buy something with good APIs, it
+can enable you to move to different software later because
+the APIs can help you get your data out. There are even
+well-worn software engineering techniques for migrating
+from one software system to another if they both have APIs.
 
 ---
 <!-- .slide: class="content" -->
@@ -112,10 +136,63 @@ etc. You just turned a knob and there was water.
 * ## Independence
   Want to switch from well water to city water? You don't
   need a new faucet!
+
+Notes:
+* ## Maintainability
+  The water treatment facility can be fixed without you
+  having to replace your sink, but they also don't need
+  to know anything about your sink. And if your sink
+  starts to leak, you can patch it up without needing to
+  do anything at the water source.
+
+  Imagine if instead of all these pieces of a water system,
+  what if you had to collect the water yourself, filter it,
+  and pump it up to pressure. And I know this is true for
+  some people. When something goes wrong at the sink, you
+  have to check the pump, the filters, and even your water
+  supply.
+
+* ## Abstraction
+  Abstraction also means that I'm not responsible for fixing
+  the water filtration system. I'm just hooked up to it.
+  It helps draw clearer boundaries of who is responsible for
+  what. When you just have one big system, that system bears
+  a lot of responsibility.
+
+  Somewhat tangentially, this can also be a political hot
+  potato. If there's one big system, who is responsible for
+  it? Whose name? That can be a difficult or contentious
+  question: maybe nobody wants their name attached to it,
+  or maybe different people want to claim specific parts of
+  it. Smaller systems connected via APIs reduce the
+  individual risk and also make it easier for domain
+  experts to have control over their piece without having
+  to accept responsibility for everything else.
+
+* ## Testable
+  There are a lot of pieces involved in getting water from
+  wherever it is into your house. Because we have lots of
+  small systems connected by pipes, we can test each piece
+  by disconnecting the pipes and controlling the input
+  to verify the output. And we can do that in isolation, so
+  we're sure that the thing we're tesitng is responsible
+  for the output we're measuring.
+
+  If a water treatment facility needed to be tested for
+  efficacy, you could disconnect it from the water system.
+  Then put in dirty water with known contaminants and
+  measure what comes out. You don't need to rely on the
+  quality of the water source, and you don't need to worry
+  about sending dirty water into people's homes.
+
+* ## Independence
+  Want to switch from well water to city water? You don't
+  need a new faucet! And if you do want a new faucet? You
+  don't need permission from the water supplier.
 ---
 <!-- .slide: class="content" -->
 
-## Data is like water, APIs are like taps
+## Data is like water, APIs are like pipes
 
 If you want to know the current yield on 30 year
 treasuries, you can just ask for that. If you want
@@ -148,6 +225,14 @@ single day.
 <iframe src="https://api.weather.gov" style="width: 80vw; height: 70vh;">
 </iframe>
 
+Notes: This is a live look at api.weather.gov. The page we're
+looking at is documentation of all the kinda of data that you
+can get from the National Weather Service.
+
+This is a particular kind of API, called a REST API. When
+people talk about APIs today, they generally mean REST. What
+makes these cool is that they are just web pages.
+
 ---
 <!-- .slide: class="content" -->
 
@@ -157,6 +242,30 @@ Current conditions in Goofy Ridge, IL:
 https://api.weather.gov/stations/KPIA/observations?limit=1
 
 <pre class="code-wrapper"><code class="language-json" data-temperature-raw></code></pre>
+
+Notes: And this is – again, live – the data that the weather
+API returned for the current weather conditions near Goofy
+Ridge.
+
+If you open the URL up above in your web browser, this is
+what you'll see. This is in a data format called Jay-Sohn,
+spelled J-S-O-N. It is a format intended for computers to
+read, but it is not too bad for humans either. Anyway, these
+APIs being essentially just web pages is very important
+because it demonstrates how easy they are to use.
+
+Now looking at this data a little bit, we can see the
+current weather, we can scroll down here and see the current
+temperature in Celsius. Wind speed. And so on.
+
+If you were to visit beta.weather.gov right now, it is using
+this API to collect all of the data it uses to show your
+forecast page. This way, the team responsible for the website
+doesn't have to be responsible for also maintaining accurate
+observations or severe weather alerts – instead, that team
+only has to focus on making the data easy to understand.
+There are several daunting tasks tied up in this, but there
+are also several distinct teams and systems sharing the load.
 
 ---
 <!-- .slide: class="section" -->
