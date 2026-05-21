@@ -4,6 +4,46 @@
 
 how computers talk to each other
 
+Notes:
+Welcome to another lunch and learn, thank you for coming.
+I'm Greg Walker, he/him, a software engineer on the
+digital services team, and I'm based in Minneapolis. And
+today I'm going to be talking about APIs, which is how
+computers talk to each other. As always, this is being
+recorded for folks who want to watch it later, and if
+you don't want to have your face recorded, this is a
+great time to mute your face!
+
+Some of you may have seen the topic or this slide and
+thought maybe this isn't for you because it's a technical
+topic, but it's totally for you, for two reasons. One,
+you're already surrounded by APIs every day and maybe
+knowing what they are and how they work will be helpful
+to you.
+
+But two, to be blunt – and this is a rant – the computing
+industry has been making itself hard to understand for
+the last 15-20 years, and that has been on purpose.
+Writing code and hooking systems up together is really
+not that complicated. Yes, if you want to write software,
+you have to learn another language, but that's really the
+extent of it. Otherwise it's pretty much just flowcharts.
+
+And it makes me mad that we've made it seem harder than
+it is, because it's been abused. This rant comes from
+my experience in federal government because that knowledge
+asymmetry has resulted in governments spending a lot of
+money on crappy software because they don't know better
+or they feel unqualified to push back. And that has
+resulted in worse experiences and outcomes for people.
+
+So anyway, that's a part of my motivation for this talk,
+to empower people to have more control of the technology
+in their everyday lives. But also, I just think it's
+neat.
+
+So anyway, let's jump in?
+
 ---
 <!-- .slide: class="section" -->
 
@@ -40,22 +80,6 @@ do more complex tasks. This has some benefits:
   easier to swap them out over time.
 
 Notes:
-* ## Maintainability
-  Because each piece does a relatively simple and isolated
-  task, it's easier to maintain over time.
-
-* ## Abstraction
-  When you're using someone else's data, you don't have to
-  know about how it was collected or processed.
-
-* ## Testable
-  Smaller pieces doing simpler logic are easier to understand
-  and test, leading to higher confidence that they work.
-
-* ## Independence
-  Letting external systems handle specific needs makes it
-  easier to swap them out over time.
-
 APIs are also an important thing to look for in software
 procurements. When you buy something with good APIs, it
 can enable you to move to different software later because
@@ -72,7 +96,9 @@ from one software system to another if they both have APIs.
 <!-- .element: class="center" -->
 
 Note: So imagine you're standing at this weird-looking
-sink. You need to wash your hands.
+sink. I like to draw. This is what my drawings look.
+I draw weird-looking sinks. Anyway, you need to wash
+your hands.
 
 ---
 <!-- .slide: class="content" -->
@@ -83,9 +109,10 @@ sink. You need to wash your hands.
 <!-- .element: class="center" -->
 
 Note: So you twist the red knob and you get hot water.
-In this analogy, you've just made a request to the API:
-give me hot water, and out it pops. But this isn't the
-water you want to wash your hands with, it'll burn.
+In this somewhat tortured analogy, you've just made a
+request to the API: give me hot water, and out it pops.
+But this isn't the water you want to wash your hands
+with, it'll burn.
 
 ---
 <!-- .slide: class="content" -->
@@ -155,23 +182,6 @@ Notes:
   have to check the pump, the filters, and even your water
   supply.
 
-* ## Abstraction
-  Abstraction also means that I'm not responsible for fixing
-  the water filtration system. I'm just hooked up to it.
-  It helps draw clearer boundaries of who is responsible for
-  what. When you just have one big system, that system bears
-  a lot of responsibility.
-
-  Somewhat tangentially, this can also be a political hot
-  potato. If there's one big system, who is responsible for
-  it? Whose name? That can be a difficult or contentious
-  question: maybe nobody wants their name attached to it,
-  or maybe different people want to claim specific parts of
-  it. Smaller systems connected via APIs reduce the
-  individual risk and also make it easier for domain
-  experts to have control over their piece without having
-  to accept responsibility for everything else.
-
 * ## Testable
   There are a lot of pieces involved in getting water from
   wherever it is into your house. Because we have lots of
@@ -181,17 +191,37 @@ Notes:
   we're sure that the thing we're tesitng is responsible
   for the output we're measuring.
 
-  If a water treatment facility needed to be tested for
-  efficacy, you could disconnect it from the water system.
-  Then put in dirty water with known contaminants and
-  measure what comes out. You don't need to rely on the
-  quality of the water source, and you don't need to worry
-  about sending dirty water into people's homes.
+  Imagine the city built a new water treatment facility
+  and needed to test how effective it is. It's not yet
+  hooked up to the water source or the the plumbing system.
+  They could feed it dirty water and measure what comes
+  out. You don't need to rely on the quality of the water
+  source, and you don't need to worry about sending dirty
+  water into people's homes. It's an isolated unit.
+
+* ## Abstraction
+  Abstraction also means that I'm not responsible for fixing
+  the water filtration system. I'm just hooked up to it.
+  It helps draw clearer boundaries of who is responsible for
+  what. When you just have one big system, that system bears
+  a lot of responsibility.
+
+  Somewhat tangentially, this can also be a political hot
+  potato. If there's one big system, who is responsible for
+  it? Whose name? Who gets called before the legislature if
+  something goes wrong? That can be a difficult or contentious
+  question: maybe nobody wants their name attached to it,
+  or maybe different people want to claim specific parts of
+  it. Smaller systems connected via APIs reduce the
+  individual risk and also make it easier for domain
+  experts to have control over their piece without having
+  to accept responsibility for everything else.
 
 * ## Independence
   Want to switch from well water to city water? You don't
   need a new faucet! And if you do want a new faucet? You
   don't need permission from the water supplier.
+
 ---
 <!-- .slide: class="content" -->
 
@@ -265,22 +295,20 @@ temperature in Celsius. Wind speed. And so on.
 If you were to visit beta.weather.gov right now, it is using
 this API to collect all of the data it uses to show your
 forecast page. This way, the team responsible for the website
-doesn't have to be responsible for also maintaining accurate
-observations or severe weather alerts – instead, that team
-only has to focus on making the data easy to understand.
-There are several daunting tasks tied up in this, but there
-are also several distinct teams and systems sharing the load.
+doesn't have to be responsible for maintaining accurate
+observations or severe weather alerts – instead, the website
+team only has to focus on making the data easy to understand.
 
 ---
 <!-- .slide: class="section" -->
 
 # APIs allow different systems to connect their data
 
-A lot of work at STO revolves around taking data from two
-or more systems and combining or reconciling them. But what
-if those systems shared their data automatically so the
-people could spend less time putting data together and more
-time <em>using</em> that data?
+A lot of work at STO revolves around taking data from multiple
+systems and combining or reconciling them. But what if those
+systems shared their data automatically so the people could
+spend less time putting data together and more time
+<em>using</em> that data?
 
 ---
 <!-- .slide: class="content" -->
@@ -311,6 +339,18 @@ automatically at regular intervals?
 
 # What STO data
 # could be connected?
+
+[Tell us your ideas!](https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=IEaCO5DNPUirK9kF_pQlLlU4x2cg8BBEo1yXzVG80CFUMUFJSkZKRjhNNDIxMUJESlhSSlo2UzEwTyQlQCN0PWcu)
+
+Notes:
+So I hope that you have a little better understanding
+of what APIs are and how they're used, but I also
+hope this has inspired you. The digital services
+team is a support function: you're the experts here,
+and we need your help to understand how *we* can
+help. Where are the rough integrations between
+systems? Where are you having to copy data from one
+spreadsheet to another, or things like that?
 
 ---
 

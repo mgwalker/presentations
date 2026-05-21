@@ -68,6 +68,17 @@
         color: var(--text-light);
         margin-bottom: 1rem;
       }
+
+      a,
+      a:visited {
+        color: var(--text-bright);
+        text-decoration: none;
+        border-bottom: 3px dotted white;
+
+        &:hover {
+          color: var(--text-light);
+        }
+      }
     }
 
     // These sections are just a slide type. The
