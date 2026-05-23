@@ -1,0 +1,413 @@
+<!-- .slide: class="title" -->
+
+# WTF is DevOps?
+
+Letting people and computers do the things
+they're each good at
+
+---
+<!-- .slide: class="summary" -->
+DevOps combines software development with operations into
+one team, and automates as many of their processes as
+possible. People focus on the hard problems and let the
+computers handle the repetitive stuff.
+
+Notes:
+Computers are exceptionally good at doing the same thing
+over and over.  People aren’t really that great at it -
+we get bored, we get distracted and forget a step, we forget
+to do the whole thing.  In general it’s a good use of your
+computing resources to let them do the things they’re good
+at, and that frees up your people to do the things they’re
+good at too.
+
+---
+<!-- .slide: class="content four-dots" -->
+
+# The DevOps culture
+
+DevOps is not about tools or processes. It's about culture.
+
+* Open communications and **knowledge sharing** enhance
+  trust within the team<br><br>
+
+* Emphasize the entire **system**, not just one piece,
+  department, or interest
+
+* **Continuous feedback** results in tighter processes
+that get better and better
+
+* **Experimentation** lets us learn from successes and
+failures, constantly.
+
+Notes:
+At its heart, DevOps is about culture, not any particular
+processes or patterns, though there are some common
+practices that have emerged and we’ll talk about those
+just a second.  But first I just wanted to introduce
+these key ideas that DevOps values.
+
+---
+<!-- .slide: class="section" -->
+
+# <span class="highlight">1/</span> Testing
+
+Notes:
+The philosophy of devops is important, but it’s also
+hand-wavy and just talk, so let’s get into some of the
+practices that devops has embraced and how they support
+that philosophy - and our larger goals of user-centered
+design and continuous improvement.
+
+---
+<!-- .slide: class="summary" -->
+
+# Does it do what it’s supposed to? Do the things that worked yesterday still work today?
+
+Testing is about making sure the application does what
+it’s supposed to and catching bugs as early as possible.
+
+Notes:
+Tests are intended to catch bugs before the users have to
+see the software.  Once a feature is done and works,
+tests should prevent that feature from breaking in the
+future. And if you create the tests before you write the
+code, you can even catch bugs in brand new features, which
+is pretty cool.
+
+---
+
+        <section id="s03">
+          <img src="images/nws-logo.svg">
+          <h1>National Weather<br>Service + 18F</h1>
+          <div style="padding: 3rem 0;"></div>
+          the great rubber band<br>
+          ball detangling of 2024
+        </section>
+
+        <section id="s04">
+          <img src="images/nws-logo.svg">
+          <h1>This story starts<br>in 1942</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            Collecting and distributing meteorological<br>
+            data was originally a military duty. In 1942,<br>
+            they created a central communications hub<br>
+            where all data was sent and analyzed. In 1951,<br>
+            the World Meteorological Organization – a UN<br>
+            office – established the first global standards<br>
+            for interconnecting the world’s weather offices.<br>
+            The US’s central weather hub became the<br>
+            Telecom Gateway, which is still in use today.
+          </span>
+          <aside class="notes">
+            So the foundations of the National Weather Service’s current
+            IT architecture were laid down over 70 years ago. If you
+            imagine there’s cruft in this system, you are correct.
+          </aside>
+
+        </section>
+
+        <section id="s05">
+          <img src="images/nws-logo.svg">
+          <h1>And then the<br>information needs<br>exploded</h1>
+          <div style="padding: 3rem 0;"></div>
+          Naturally, right? Because<br>computers became a thing.
+          <aside class="notes">
+            What began as a few large computers very quickly become
+            a lot of small computers, so moving data around became
+            harder and more complicated. At the same time, the
+            quantity of data also blew up as the number of sensors
+            and the frequency of sensing both increased. Plus more
+            advanced weather models have produced ever more
+            granular detail, which also increases the amount of
+            data to deal with.
+          </aside>
+        </section>
+
+        <section id="s06">
+          <img src="images/nws-logo.svg">
+          <h1>And of course the<br>money dried up</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            As with all federal agencies, funding tightened<br>
+            up considerably. IT systems grew up without as<br>
+            much documentation or change management.<br>
+            As new needs appeared, people were hesitant to<br>
+            use existing systems because they weren’t<br>
+            sure how they worked. So that meant creating<br>
+            more new systems.
+            <br><br>
+            Over and over and over.
+          </span>
+        </section>
+
+        <section id="s07">
+          <img src="images/nws-logo.svg">
+          <h1>Hence, a rubber<br>band ball of<br>IT systems</h1>
+          <div style="padding: 3rem 0;"></div>
+          <aside class="notes">
+            You just keep adding new systems instead of modifying the
+            behavior of existing systems, because you don’t know enough
+            about the existing systems anymore to feel comfortable
+            changing them.
+          </aside>
+        </section>
+
+        <section id="s08">
+          <img src="images/nws-logo.svg">
+          <h1>
+            A lot of systems,<br>
+            but not a lot of<br>
+            comprehensive<br>
+            understanding<br>
+            of them all
+          </h1>
+          <aside class="notes">
+            Which is, of course, pretty normal. It’s hard to keep giant
+            inter-tangled systems in your head. And even if you document
+            them, it’s hard to keep the documentation consistent with
+            reality.
+          </aside>
+        </section>
+
+        <section id="s09">
+          <img src="images/nws-logo.svg">
+          <h1>
+            How does anything<br>
+            actually get done?
+          </h1>
+        </section>
+
+        <section id="s10">
+          <img src="images/nws-logo.svg">
+          <h1>
+            Let's follow one event's<br>
+            entire lifecycle!
+          </h1>
+        </section>
+
+        <section id="s11">
+          <div>
+            <img class="top" src="images/neat-top.jpg">
+            <img class="bottom" src="images/neat-bottom.jpg">
+          </div>
+          <aside class="notes">
+            In case you didn’t notice those last two slides.
+            Please clap.
+          </aside>
+        </section>
+
+        <section id="s12">
+          <h1>EVENT STORMING!</h1>
+          <div class="giant">⚡️</div>
+          <aside class="notes">
+            It turns out that emoji characters get pixelated if
+            you make the font too big. Who knew!
+          </aside>
+        </section>
+
+        <section id="s14">
+          <h1>
+            Prompt: there's a<br>
+            hazardous weather<br>
+            outlook.
+          </h1>
+
+          <ul>
+            <li>What has happened?</li>
+            <li>What happens next?</li>
+          </ul>
+        </section>
+
+        <section id="s15" data-background-image="images/stickies.jpg">
+          <aside class="notes">
+            And then we set them loose on this humongous piece of
+            paper. They were to add stickies identifying events in
+            different systems across the National Weather Service.
+            And boy did they!
+          </aside>
+        </section>
+
+        <section id="s16" data-background-image="images/stickies2.jpg">
+          <aside class="notes">
+            They produced a LOT of stickies.
+          </aside>
+        </section>
+
+        <section id="s17" data-background-color="#e69138" data-background-image="images/peeps.png">
+          <aside class="notes">
+            And they talked amongst themselves a lot.
+          </aside>
+        </section>
+
+        <section id="s18">
+          <img src="images/nws-logo.svg">
+          <h1>What'd we learn?</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            <ul>
+              <li>
+                IT system knowledge ran very deep,<br>
+                but not as broad
+              </li>
+              <li class="hide" aria-hidden="true">
+                There were some surprising<br>
+                system relationships
+              </li>
+              <li class="hide" aria-hidden="true">
+                There are multiple ways of<br>
+                getting whatever you want
+              </li>
+              <li class="hide" aria-hidden="true">
+                Getting a weather warning on your<br>
+                phone involves a dozen systems
+              </li>
+            </ul>
+          </span>
+          <aside class="notes">
+            I can point out the person who knows everything about
+            the telecom gateway, but they don’t know everything
+            about AWIPS
+          </aside>
+        </section>
+
+        <section id="s19">
+          <img src="images/nws-logo.svg">
+          <h1>What'd we learn?</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            <ul>
+              <li>
+                IT system knowledge ran very deep,<br>
+                but not as broad
+              </li>
+              <li>
+                There were some surprising<br>
+                system relationships
+              </li>
+              <li class="hide" aria-hidden="true">
+                There are multiple ways of<br>
+                getting whatever you want
+              </li>
+              <li class="hide" aria-hidden="true">
+                Getting a weather warning on your<br>
+                phone involves a dozen systems
+              </li>
+            </ul>
+          </span>
+          <aside class="notes">
+            A few exclamations of “I didn’t realize system X
+            originated data Y.”
+          </aside>
+        </section>
+
+        <section id="s20">
+          <img src="images/images/nws-logo.svg">
+          <h1>What'd we learn?</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            <ul>
+              <li>
+                IT system knowledge ran very deep,<br>
+                but not as broad
+              </li>
+              <li>
+                There were some surprising<br>
+                system relationships
+              </li>
+              <li>
+                There are multiple ways of<br>
+                getting whatever you want
+              </li>
+              <li class="hide" aria-hidden="true">
+                Getting a weather warning on your<br>
+                phone involves a dozen systems
+              </li>
+            </ul>
+          </span>
+          <aside class="notes">
+            Options are good, but it can be confusing too. Do we
+            get this via text product? LDM? API? Is it in a
+            shapefile? Is it in a net cdf? So many options. And
+            they all have tradeoffs.
+          </aside>
+        </section>
+
+        <section id="s21">
+          <img src="images/nws-logo.svg">
+          <h1>What'd we learn?</h1>
+          <div style="padding: 3rem 0;"></div>
+          <span class="left">
+            <ul>
+              <li>
+                IT system knowledge ran very deep,<br>
+                but not as broad
+              </li>
+              <li>
+                There were some surprising<br>
+                system relationships
+              </li>
+              <li>
+                There are multiple ways of<br>
+                getting whatever you want
+              </li>
+              <li>
+                Getting a weather warning on your<br>
+                phone involves a dozen systems
+              </li>
+            </ul>
+          </span>
+        </section>
+
+        <section id="s22">
+          <h1>
+            Maybe NWS's first<br>
+            system map?
+          </h1>
+          <img src="images/system-map.jpg">
+          <aside class="notes">
+            This mural may be the closest the National Weather
+            Service has ever gotten to having a complete IT
+            systems map. I’ll see about sharing a readonly
+            Mural link.
+          </aside>
+        </section>
+
+        <section id="s23">
+          <h1>
+            The goal was only to identify<br>
+            as many touch points as we<br>
+            could, so future teams could<br>
+            do the work of detangling<br>
+            everything.
+          </h1>
+        </section>
+
+        <section id="s24">
+          <h1>Success!</h1>
+          <aside class="notes">
+            This was a great exercise. It got a lot of the key
+            folks into the same room, which is rare in and of
+            itself. They had fun, we had fun, and collectively
+            we learned a lot. I think everyone knew these
+            systems were complex going in, so it was nice to
+            have that validated and also to come out of it
+            with a map of some of the relationships between
+            the systems.
+          </aside>
+        </section>
+
+        <section id="s25">
+          <h1>
+            If you’ve got a rubber band<br>
+            ball system, consider<br>
+            event storming!
+          </h1>
+        </section>
+
+        <section id="s26">
+          <h1>bye!</h1>
+        </section>
+      </div>
+    </div>

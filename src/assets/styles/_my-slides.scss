@@ -106,6 +106,10 @@
         max-width: 70vw;
       }
 
+      .highlight {
+        color: var(--text-light);
+      }
+
       p {
         margin-bottom: 2rem;
         width: 60vw;
@@ -144,6 +148,15 @@
       p {
         padding: 0 20vw;
         text-align: center;
+      }
+
+      h1,
+      h2 {
+        align-self: start;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-darkest);
+        margin-bottom: 1rem;
       }
     }
 
